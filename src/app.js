@@ -64,6 +64,18 @@ var HelloWorldLayer = cc.Layer.extend({
                 cc.tintTo(2.5,255,125,0)
             )
         );
+
+        //首先要load plugin
+        agent.loadALLPlugin();
+
+        //获取各个插件
+        var user_plugin  = agent.getUserPlugin();    //用户系统
+        var iap_plugins   = agent.getIAPPlugin();    //支付系统
+        var share_plugin = agent.getSharePlugin();    //分享系统
+        var ads_plugin   = agent.getAdsPlugin();    //广告系统
+        var social_plugin = agent.getSocialPlugin();    //社交系统
+        var push_plugin  = agent.getPushPlugin();    //推送系统
+
         return true;
     }
 });
@@ -73,6 +85,14 @@ var HelloWorldScene = cc.Scene.extend({
         this._super();
         var layer = new HelloWorldLayer();
         this.addChild(layer);
+
+        //初始化 anysdk
+        var appKey = "CED525C0-8D41-F514-96D8-90092EB3899A";
+        var appSecret = "a29b4f22aa63b8274f7f6e2dd5893d9b";
+        var privateKey = "963C4B4DA71BC51C69EB11D24D0C7D49";
+        var oauthLoginServer = "http://oauth.qudao.info/api/OauthLoginDemo/Login.php";
+        var agent = anysdk.AgentManager.getInstance();
+        agent.init(appKey,appSecret,privateKey,oauthLoginServer);
     }
 });
 
