@@ -29,13 +29,19 @@ LOCAL_SRC_FILES := \
 ../../Classes/VisibleRect.cpp \
 ../../Classes/AppDelegate.cpp \
 ../../Classes/ConfigParser.cpp \
+../../Classes/autoanysdkbindings.cpp \
+../../Classes/manualanysdkbindings.cpp \
 javascript/Runtime_android.cpp \
 javascript/main.cpp
+
 
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../../Classes/runtime \
 $(LOCAL_PATH)/../../Classes/protobuf-lite \
+$(LOCAL_PATH)/../protocols/android \
+$(LOCAL_PATH)/../protocols/include \
 $(LOCAL_PATH)/../../Classes
+
                     
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos_jsb_static
@@ -47,6 +53,7 @@ LOCAL_WHOLE_STATIC_LIBRARIES += jsb_studio_static
 LOCAL_WHOLE_STATIC_LIBRARIES += jsb_network_static
 LOCAL_WHOLE_STATIC_LIBRARIES += jsb_builder_static
 LOCAL_WHOLE_STATIC_LIBRARIES += jsb_spine_static
+LOCAL_WHOLE_STATIC_LIBRARIES += PluginProtocolStatic
 
 LOCAL_EXPORT_CFLAGS := -DCOCOS2D_DEBUG=2 -DCOCOS2D_JAVASCRIPT
 
@@ -62,3 +69,5 @@ $(call import-module,bindings/manual/cocosbuilder)
 $(call import-module,bindings/manual/ui)
 $(call import-module,bindings/manual/cocostudio)
 $(call import-module,bindings/manual/spine)
+$(call import-module,protocols/android)
+
