@@ -56,6 +56,8 @@ import android.widget.Toast;
 // The name of .so is specified in AndroidMenifest.xml. NativityActivity will load it automatically for you.
 // You can use "System.loadLibrary()" to load other .so files.
 
+import com.anysdk.framework.PluginWrapper;
+
 public class AppActivity extends Cocos2dxActivity{
 
 	static String hostIPAdress="0.0.0.0";
@@ -63,6 +65,8 @@ public class AppActivity extends Cocos2dxActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+
+        PluginWrapper.init(this); // for plugins
 		
 		if(nativeIsLandScape()) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
@@ -148,6 +152,27 @@ public class AppActivity extends Cocos2dxActivity{
 		}
 		return null;
 	}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        PluginWrapper.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PluginWrapper.onResume();
+    }
+    @Override
+    public void onPause(){
+        PluginWrapper.onPause();
+        super.onPause();
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        PluginWrapper.onNewIntent(intent);
+        super.onNewIntent(intent);
+    }
 	
 	private static native boolean nativeIsLandScape();
 	private static native boolean nativeIsDebug();
