@@ -28,6 +28,9 @@
 #include "Runtime.h"
 #include "ConfigParser.h"
 
+#include "autoanysdkbindings.hpp"
+#include "manualanysdkbindings.hpp"
+
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -104,6 +107,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     if (startRuntime())
         return true;
 #endif
+
+    sc->addRegisterCallback(register_all_autoanysdkbindings);
+    sc->addRegisterCallback(register_all_anysdk_manual);
 
     ScriptingCore::getInstance()->start();
     auto engine = ScriptingCore::getInstance();
