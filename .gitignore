@@ -1,0 +1,6 @@
+frameworks/cocos2d-html5/
+frameworks/js-bindings/
+runtime/
+tools/
+
+.DS_Store
